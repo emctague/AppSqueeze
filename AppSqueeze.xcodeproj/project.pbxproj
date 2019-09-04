@@ -7,42 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		741DB8C7F9A1E7A6E1161B6A /* AppSqueezeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A072508F0454688DB2EC82 /* AppSqueezeUITests.swift */; };
-		7421F9B17F4D0527BFD95F79 /* AppSqueezeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D6A6C4EE86A45021EBF08 /* AppSqueezeTests.swift */; };
 		7425BE57917BE6D5B4DE928F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7496BC131697709A34511F28 /* ViewController.swift */; };
 		742D9C630052A9B0B3D9A72D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 740ACF861020B5C22BF12F5A /* Assets.xcassets */; };
 		7431DD7084BA533116448858 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740CFC1117206C71F19D59B5 /* Main.storyboard */; };
 		744BC049ABA82AD1117136E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B26D4E55522F4E499DC77E /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		74589DF6E91CE86D94DDE5DB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 74DA4ADA17FE0B7FA154CA27 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 74CE90581D7390755D260551;
-			remoteInfo = AppSqueeze;
-		};
-		74B89D8CF894F7B6A6378426 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 74DA4ADA17FE0B7FA154CA27 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 74CE90581D7390755D260551;
-			remoteInfo = AppSqueeze;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		740ACF861020B5C22BF12F5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		741B0F217F6B3AC023D5CD04 /* AppSqueezeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppSqueezeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		744BFEE5F8E2620CA20D27E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		7452E085E22F72A0835D246B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
-		74540162459AE7FCDE281AC3 /* AppSqueezeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppSqueezeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		74741C3E91E30232C7825977 /* AppSqueeze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppSqueeze.entitlements; sourceTree = "<group>"; };
-		748D6A6C4EE86A45021EBF08 /* AppSqueezeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSqueezeTests.swift; sourceTree = "<group>"; };
 		7496BC131697709A34511F28 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		74A072508F0454688DB2EC82 /* AppSqueezeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSqueezeUITests.swift; sourceTree = "<group>"; };
-		74AC03E7DD384B619B295BF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		74B26D4E55522F4E499DC77E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74B7FD147BCEC63FA8AA1073 /* AppSqueeze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppSqueeze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74CB016190D4DF1CFBC5AC65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -50,20 +25,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		749198E6823CF0905DD32019 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		74AA2E2425F5C07753BD1438 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		74D0A8628CBD4B32D410A2C9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -90,8 +51,6 @@
 			isa = PBXGroup;
 			children = (
 				74B7FD147BCEC63FA8AA1073 /* AppSqueeze.app */,
-				74540162459AE7FCDE281AC3 /* AppSqueezeTests.xctest */,
-				741B0F217F6B3AC023D5CD04 /* AppSqueezeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,50 +60,12 @@
 			children = (
 				74203630DA301C077B280349 /* Products */,
 				7413AAA01AB0D5BC9BF68175 /* AppSqueeze */,
-				74F81C943F5E819163D4F50E /* AppSqueezeTests */,
-				74CEA5665845BD2242996E66 /* AppSqueezeUITests */,
 			);
-			sourceTree = "<group>";
-		};
-		74CEA5665845BD2242996E66 /* AppSqueezeUITests */ = {
-			isa = PBXGroup;
-			children = (
-				74AC03E7DD384B619B295BF6 /* Info.plist */,
-				74A072508F0454688DB2EC82 /* AppSqueezeUITests.swift */,
-			);
-			path = AppSqueezeUITests;
-			sourceTree = "<group>";
-		};
-		74F81C943F5E819163D4F50E /* AppSqueezeTests */ = {
-			isa = PBXGroup;
-			children = (
-				744BFEE5F8E2620CA20D27E9 /* Info.plist */,
-				748D6A6C4EE86A45021EBF08 /* AppSqueezeTests.swift */,
-			);
-			path = AppSqueezeTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		74852D064F3ECE46A408D132 /* AppSqueezeTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7445DE497CEF2EEA53728F34 /* Build configuration list for PBXNativeTarget "AppSqueezeTests" */;
-			buildPhases = (
-				74880508ADED434041D6B2BC /* Sources */,
-				74D0A8628CBD4B32D410A2C9 /* Frameworks */,
-				74E6D1AA34F9F53CC549CED5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7441EE8E8B3B8B593D4F0120 /* PBXTargetDependency */,
-			);
-			name = AppSqueezeTests;
-			productName = AppSqueezeTests;
-			productReference = 74540162459AE7FCDE281AC3 /* AppSqueezeTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		74CE90581D7390755D260551 /* AppSqueeze */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 74E5F6E4F99EF318036CAA53 /* Build configuration list for PBXNativeTarget "AppSqueeze" */;
@@ -161,24 +82,6 @@
 			productName = AppSqueeze;
 			productReference = 74B7FD147BCEC63FA8AA1073 /* AppSqueeze.app */;
 			productType = "com.apple.product-type.application";
-		};
-		74E305F1E86F65590BDB3998 /* AppSqueezeUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 74F951E5724AD6882EC03EED /* Build configuration list for PBXNativeTarget "AppSqueezeUITests" */;
-			buildPhases = (
-				7432C279EE992F4865540A80 /* Sources */,
-				74AA2E2425F5C07753BD1438 /* Frameworks */,
-				7411018CD821D565DB8C5BBB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				74CBA7DC709801A42DB5758B /* PBXTargetDependency */,
-			);
-			name = AppSqueezeUITests;
-			productName = AppSqueezeUITests;
-			productReference = 741B0F217F6B3AC023D5CD04 /* AppSqueezeUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -202,20 +105,11 @@
 			projectRoot = "";
 			targets = (
 				74CE90581D7390755D260551 /* AppSqueeze */,
-				74852D064F3ECE46A408D132 /* AppSqueezeTests */,
-				74E305F1E86F65590BDB3998 /* AppSqueezeUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7411018CD821D565DB8C5BBB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		746565A398E983357EB8D881 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -225,24 +119,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		74E6D1AA34F9F53CC549CED5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7432C279EE992F4865540A80 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				741DB8C7F9A1E7A6E1161B6A /* AppSqueezeUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		745966A23126192002BF5467 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -252,28 +131,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		74880508ADED434041D6B2BC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7421F9B17F4D0527BFD95F79 /* AppSqueezeTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7441EE8E8B3B8B593D4F0120 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 74CE90581D7390755D260551 /* AppSqueeze */;
-			targetProxy = 74B89D8CF894F7B6A6378426 /* PBXContainerItemProxy */;
-		};
-		74CBA7DC709801A42DB5758B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 74CE90581D7390755D260551 /* AppSqueeze */;
-			targetProxy = 74589DF6E91CE86D94DDE5DB /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		740CFC1117206C71F19D59B5 /* Main.storyboard */ = {
@@ -337,32 +195,6 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-			};
-			name = Release;
-		};
-		7427B6A75141ABBD25FB51E1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = AppSqueezeUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.tague.AppSqueezeUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = AppSqueeze;
-			};
-			name = Debug;
-		};
-		7427CF7DBE0E33BF7341C664 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = AppSqueezeUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.tague.AppSqueezeUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = AppSqueeze;
 			};
 			name = Release;
 		};
@@ -455,46 +287,9 @@
 			};
 			name = Debug;
 		};
-		74CCC3FE06E9FCB8E1140D0A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AppSqueeze.app/Contents/MacOS/AppSqueeze";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = AppSqueezeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.tague.AppSqueezeTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Release;
-		};
-		74E2A5E8CDE9C2301C459818 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AppSqueeze.app/Contents/MacOS/AppSqueeze";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = AppSqueezeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.tague.AppSqueezeTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7445DE497CEF2EEA53728F34 /* Build configuration list for PBXNativeTarget "AppSqueezeTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				74E2A5E8CDE9C2301C459818 /* Debug */,
-				74CCC3FE06E9FCB8E1140D0A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		74A4B6064AE7E2EBE64B5F47 /* Build configuration list for PBXProject "AppSqueeze" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -509,15 +304,6 @@
 			buildConfigurations = (
 				74528CA1B3DD1843981AF50E /* Debug */,
 				7448D3D5F0A279B521B18282 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		74F951E5724AD6882EC03EED /* Build configuration list for PBXNativeTarget "AppSqueezeUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7427B6A75141ABBD25FB51E1 /* Debug */,
-				7427CF7DBE0E33BF7341C664 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

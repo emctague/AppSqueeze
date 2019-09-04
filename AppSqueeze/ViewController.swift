@@ -60,7 +60,6 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     override func viewWillAppear() {
@@ -80,7 +79,6 @@ class ViewController: NSViewController {
 
     // Handles the clicking of the 'create' button, creating the app.
     @IBAction func onClickCreate(_ sender: NSButton) {
-        
         // Process the provided input by trimming whitespace
         let realAppName = appName.stringValue.trimmingCharacters(in: .whitespaces)
         let realAppVersion = appVersion.stringValue.trimmingCharacters(in: .whitespaces)
