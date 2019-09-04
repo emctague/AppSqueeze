@@ -723,6 +723,13 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="MYv-hH-0Uv" secondAttribute="height" multiplier="1:1" id="ddf-OC-cYu"/>
                                                         </constraints>
+                                                        <gestureRecognizers>
+                                                            <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="gcf-MV-Q6C">
+                                                                <connections>
+                                                                    <action selector="onIconClick:" target="XfG-lQ-9wD" id="AlD-09-lR1"/>
+                                                                </connections>
+                                                            </clickGestureRecognizer>
+                                                        </gestureRecognizers>
                                                         <imageCell key="cell" selectable="YES" editable="YES" focusRingType="none" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="Aw1-QN-S1H"/>
                                                     </imageView>
                                                 </subviews>

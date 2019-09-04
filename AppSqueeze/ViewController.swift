@@ -57,9 +57,36 @@ class ViewController: NSViewController {
     @IBOutlet weak var appVersion: NSTextField!
     @IBOutlet weak var roundedView: NSVisualEffectView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    // When the icon is clicked, the user should be able to choose a new one
+    @IBAction func onIconClick(_ sender: NSClickGestureRecognizer) {
+        let dialog = NSOpenPanel()
+        dialog.title = "Choose an Icon File"
+        dialog.showsResizeIndicator = true
+        dialog.canChooseDirectories = false
+        dialog.canChooseFiles = true
+        dialog.showsHiddenFiles = false
+        dialog.canCreateDirectories = false
+        dialog.allowsMultipleSelection = false
+        dialog.allowedFileTypes = ["png", "jpg", "ico", "icns", "bmp"];
+        
+        if (dialog.runModal() != NSApplication.ModalResponse.OK) {
+            return
+        }
+        
+        let image = NSImage.init(byReferencingFile: dialog.url!.path)
+        
+        if (image == nil) {
+            let alert = NSAlert()
+            alert.messageText = "That file can't be used as an icon."
+            alert.runModal()
+            return
+        }
+        
+        appIcon.image = image
     }
     
     override func viewWillAppear() {
