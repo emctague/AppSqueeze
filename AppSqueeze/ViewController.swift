@@ -161,10 +161,8 @@ class ViewController: NSViewController {
         // Create the app path, icon set path, etc.
         execute(["mkdir", "-p", iconsetPath])
     
-        
         // Copy the executable into the app directory
         execute(["install", "-m775", exePath, destExePath])
-        
         
         // Save the app icon to a file
         appIcon.image!.writeToFile(file: iconsetPath + "/icon_master.png", atomically: true, usingType: NSBitmapImageRep.FileType.png)
