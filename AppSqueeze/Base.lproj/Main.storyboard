@@ -718,7 +718,7 @@
                                             <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="behindWindow" material="selection" state="followsWindowActiveState" maskImage="RoundMask" translatesAutoresizingMaskIntoConstraints="NO" id="YJ7-0h-ZRm">
                                                 <rect key="frame" x="0.0" y="117" width="190" height="190"/>
                                                 <subviews>
-                                                    <imageView focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MYv-hH-0Uv">
+                                                    <imageView focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MYv-hH-0Uv">
                                                         <rect key="frame" x="0.0" y="0.0" width="190" height="190"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="MYv-hH-0Uv" secondAttribute="height" multiplier="1:1" id="ddf-OC-cYu"/>
@@ -730,6 +730,7 @@
                                                     <constraint firstItem="MYv-hH-0Uv" firstAttribute="leading" secondItem="YJ7-0h-ZRm" secondAttribute="leading" id="8Tp-dt-QXe"/>
                                                     <constraint firstAttribute="trailing" secondItem="MYv-hH-0Uv" secondAttribute="trailing" id="RFI-7f-n80"/>
                                                     <constraint firstAttribute="width" secondItem="YJ7-0h-ZRm" secondAttribute="height" multiplier="1:1" id="tnc-iQ-YSM"/>
+                                                    <constraint firstItem="MYv-hH-0Uv" firstAttribute="top" secondItem="YJ7-0h-ZRm" secondAttribute="top" id="xKQ-mQ-wll"/>
                                                 </constraints>
                                             </visualEffectView>
                                             <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xo6-Lz-bTQ">
