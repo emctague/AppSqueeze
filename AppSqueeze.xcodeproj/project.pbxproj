@@ -14,6 +14,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		136C08EB2320270E00B3FA33 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		740ACF861020B5C22BF12F5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7452E085E22F72A0835D246B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		74741C3E91E30232C7825977 /* AppSqueeze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppSqueeze.entitlements; sourceTree = "<group>"; };
@@ -58,6 +59,7 @@
 		7422FC29D3EAFCCC0BF8071D = {
 			isa = PBXGroup;
 			children = (
+				136C08EB2320270E00B3FA33 /* README.md */,
 				74203630DA301C077B280349 /* Products */,
 				7413AAA01AB0D5BC9BF68175 /* AppSqueeze */,
 			);
