@@ -1,6 +1,6 @@
 # AppSqueeze
 
-![AppSqueeze Screenshot](https://imgur.com/RGYmmvT)
+![AppSqueeze Screenshot](https://i.imgur.com/RGYmmvT.png)
 
 AppSqueeze is a simple application packager for MacOS.
 Just choose an icon, type up a title and some information, and you're good to go!
