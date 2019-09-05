@@ -8,24 +8,48 @@
 
 import Cocoa
 
+public enum AppMakerError: Error {
+    case missingValues
+    case badImage
+}
+
+extension AppMakerError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .missingValues:
+            return NSLocalizedString("Not all properties were given a value!", comment: "Missing Values")
+        case .badImage:
+            return NSLocalizedString("Unable to scale and save the icon!", comment: "Icon Creation Failed")
+        }
+    }
+}
+
 
 extension NSImage {
     
-    // This extension allows an NSImage to be saved to the disk
-    // This is slightly modernized from the version found here:
-    // https://gist.github.com/westerlund/e1b99e21615bb18bc380
-    func writeToFile(file: String, atomically: Bool, usingType type: NSBitmapImageRep.FileType) {
+    // This extension allows an NSImage to be saved to the disk at a given size
+    func writeToFile(file: URL, usingType type: NSBitmapImageRep.FileType, size inSize: NSSize) throws {
         let properties = [NSBitmapImageRep.PropertyKey.compressionFactor: 1.0]
+        
+        // Generate a scaled image
+        let newImage = NSImage(size: inSize)
+        newImage.lockFocus()
+        draw(in: NSRect(x: 0, y: 0, width: inSize.width, height: inSize.height),
+             from: NSRect(x: 0, y: 0, width: size.width, height: size.height),
+             operation: NSCompositingOperation.sourceOver,
+             fraction: CGFloat(1))
+        newImage.unlockFocus()
+        newImage.size = inSize
+        
+        // Save the new image
         guard
-            let imageData = tiffRepresentation,
+            let imageData = newImage.tiffRepresentation,
             let imageRep = NSBitmapImageRep(data: imageData),
             let fileData = imageRep.representation(using: type, properties: properties) else {
-                return
+                throw AppMakerError.badImage
         }
-        do {
-            try fileData.write(to: URL(fileURLWithPath: file))
-        } catch {
-        }
+        
+        try fileData.write(to: file)
     }
 }
 
@@ -63,30 +87,18 @@ class ViewController: NSViewController {
     
     // When the icon is clicked, the user should be able to choose a new one
     @IBAction func onIconClick(_ sender: NSClickGestureRecognizer) {
-        let dialog = NSOpenPanel()
-        dialog.title = "Choose an Icon File"
-        dialog.showsResizeIndicator = true
-        dialog.canChooseDirectories = false
-        dialog.canChooseFiles = true
-        dialog.showsHiddenFiles = false
-        dialog.canCreateDirectories = false
-        dialog.allowsMultipleSelection = false
-        dialog.allowedFileTypes = ["png", "jpg", "ico", "icns", "bmp"];
-        
-        if (dialog.runModal() != NSApplication.ModalResponse.OK) {
-            return
+        if let iconPath = doOpen("Choose an Icon File", ["png", "jpg", "ico", "icns", "bmp"], false) {
+            let image = NSImage.init(byReferencing: iconPath)
+            
+            if (!image.isValid) {
+                let alert = NSAlert()
+                alert.messageText = "That file can't be used as an icon."
+                alert.runModal()
+                return
+            }
+            
+            appIcon.image = image
         }
-        
-        let image = NSImage.init(byReferencingFile: dialog.url!.path)
-        
-        if (image == nil) {
-            let alert = NSAlert()
-            alert.messageText = "That file can't be used as an icon."
-            alert.runModal()
-            return
-        }
-        
-        appIcon.image = image
     }
     
     override func viewWillAppear() {
@@ -103,104 +115,110 @@ class ViewController: NSViewController {
         didSet {
         }
     }
-
+   
     // Handles the clicking of the 'create' button, creating the app.
     @IBAction func onClickCreate(_ sender: NSButton) {
         // Process the provided input by trimming whitespace
         let realAppName = appName.stringValue.trimmingCharacters(in: .whitespaces)
         let realAppVersion = appVersion.stringValue.trimmingCharacters(in: .whitespaces)
         let realAppDeveloper = appDeveloper.stringValue.trimmingCharacters(in: .whitespaces)
-        let compactAppName = realAppName.replacingOccurrences(of: " ", with: "")
-
         
-        // Ensure the user hasn't left anything blank
-        if (realAppName.isEmpty || realAppVersion.isEmpty || realAppDeveloper.isEmpty || appIcon.image == nil) {
+        if
+            let exePath = doOpen("Choose an Executable File", nil, false),
+            let appPath = doOpen("Choose a Destination", nil, true) {
+            do {
+                try createApp(realAppName, realAppVersion, realAppDeveloper, appIcon.image, exePath, appPath)
+            } catch {
+                let alert = NSAlert(error: error)
+                alert.runModal()
+                return
+            }
+            
             let alert = NSAlert()
-            alert.messageText = "Missing Values! Make sure you didn't leave any fields blank."
+            alert.informativeText = "Done!"
+            alert.messageText = "The app has been created!"
             alert.runModal()
-            return
         }
-        
-        
-        // Prompt the user to choose the executable for the app
-        let dialog = NSOpenPanel()
-        dialog.title = "Choose an Executable File"
-        dialog.showsResizeIndicator = true
-        dialog.canChooseDirectories = false
-        dialog.canChooseFiles = true
-        dialog.showsHiddenFiles = false
-        dialog.canCreateDirectories = false
-        dialog.allowsMultipleSelection = false
-        dialog.allowsOtherFileTypes = true
-        
-        if (dialog.runModal() != NSApplication.ModalResponse.OK) {
-            return
-        }
-        
-        // Get the path of the selected executable
-        let exePath = dialog.url!.path
-
-        
-        // Prompt the user for a folder to put the app in
-        dialog.title = "Choose a Destination"
-        dialog.canChooseFiles = false
-        dialog.canChooseDirectories = true
-        dialog.canCreateDirectories = true
-        
-        if (dialog.runModal() != NSApplication.ModalResponse.OK) {
-            return
-        }
-        
-        // Build the path of the app, and other derivative paths
-        let appPath = dialog.url!.path + "/" + realAppName + ".app"
-        let destExePath = appPath + "/" + realAppName
-        let iconsetPath = appPath + "/icons.iconset"
-        let iconMaster = iconsetPath + "/icon_master.png"
-        
-        
-        // Create the app path, icon set path, etc.
-        execute(["mkdir", "-p", iconsetPath])
+    }
     
-        // Copy the executable into the app directory
-        execute(["install", "-m775", exePath, destExePath])
+    func createApp (_ appName: String, _ appVersion: String, _ appDeveloper: String, _ appIcon: NSImage?, _ exeSource: URL, _ appDir: URL) throws {
+        // Ensure the user hasn't left anything blank
+        if (appName.isEmpty || appVersion.isEmpty || appDeveloper.isEmpty || appIcon == nil) {
+            throw AppMakerError.missingValues
+        }
         
-        // Save the app icon to a file
-        appIcon.image!.writeToFile(file: iconsetPath + "/icon_master.png", atomically: true, usingType: NSBitmapImageRep.FileType.png)
+        let compactAppName = appName.replacingOccurrences(of: " ", with: "")
         
+        let appDestination = appDir.appendingPathComponent(appName + ".app")
+        let exeDestination = appDestination.appendingPathComponent(appName)
+        let iconsetPath = appDestination.appendingPathComponent("icons.iconset")
+        let iconPath = appDestination.appendingPathComponent("icon.icns")
+        let plistPath = appDestination.appendingPathComponent("Info.plist")
         
-        // Use SIPS to generate resized images, and then iconutil to generate an ICNS icon file
-        execute(["sips", "-z", "1024", "1024", iconMaster, "--out", iconsetPath + "/icon_1024x1024.png"])
-        execute(["sips", "-z", "1024", "1024", iconMaster, "--out", iconsetPath + "/icon_512x512@2x.png"])
-        execute(["sips", "-z", "512", "512", iconMaster, "--out", iconsetPath + "/icon_512x512.png"])
-        execute(["sips", "-z", "512", "512", iconMaster, "--out", iconsetPath + "/icon_256x256@2x.png"])
-        execute(["sips", "-z", "256", "256", iconMaster, "--out", iconsetPath + "/icon_256x256.png"])
-        execute(["sips", "-z", "256", "256", iconMaster, "--out", iconsetPath + "/icon_128x128@2x.png"])
-        execute(["sips", "-z", "64", "64", iconMaster, "--out", iconsetPath + "/icon_64x64.png"])
-        execute(["sips", "-z", "64", "64", iconMaster, "--out", iconsetPath + "/icon_32x32@2x.png"])
-        execute(["sips", "-z", "32", "32", iconMaster, "--out", iconsetPath + "/icon_32x32.png"])
-        execute(["sips", "-z", "32", "32", iconMaster, "--out", iconsetPath + "/icon_16x16@2x.png"])
-        execute(["rm", iconMaster])
-        execute(["iconutil", "-c", "icns", "-o", appPath + "/icon.icns", iconsetPath ])
-        execute(["rm", "-rf", iconsetPath])
+        // Create the app path and iconset path
+        try FileManager.default.createDirectory(at: iconsetPath, withIntermediateDirectories: true, attributes: nil)
         
+        // Copy the executable and set its permissions
+        try FileManager.default.copyItem(at: exeSource, to: exeDestination)
+        try FileManager.default.setAttributes([ FileAttributeKey.posixPermissions: 775 ], ofItemAtPath: exeDestination.path)
+        
+        // Save the app icon at different sizes to various files
+        for i in [32, 64, 256, 512, 1024] {
+            let imgOut = iconsetPath.appendingPathComponent("icon_\(i)x\(i).png")
+            let hidpiOut = iconsetPath.appendingPathComponent("icon_\(i/2)x\(i/2)@2.png")
+            
+            try appIcon!.writeToFile(file: imgOut,
+                                     usingType: NSBitmapImageRep.FileType.png,
+                                     size: NSSize(width: i, height: i))
+            
+            try FileManager.default.copyItem(at: imgOut, to: hidpiOut)
+        }
+
+        // Generate an icon using iconutil and then remove the original icons
+        execute(["iconutil", "-c", "icns", "-o", iconPath.path, iconsetPath.path ])
+        try FileManager.default.removeItem(at: iconsetPath)
         
         // Generate and write a PList file
         let prefs = AppPList(
-            CFBundleExecutable: realAppName,
+            CFBundleExecutable: appName,
             CFBundleIconFile: "icon.icns",
             CFBundleIdentifier: "bundled-app-" + compactAppName,
-            CFBundleName: realAppName,
-            CFBundleShortVersionString: realAppVersion);
+            CFBundleName: appName,
+            CFBundleShortVersionString: appVersion);
         
-        let plistUrl = URL(fileURLWithPath: appPath + "/Info.plist")
         let encoder = PropertyListEncoder()
         
         do {
             let data = try encoder.encode(prefs)
-            try data.write(to: plistUrl)
+            try data.write(to: plistPath)
         } catch {
             return
         }
-        
     }
+    
+    // Launch a file-opening dialog with the given title, file extensions (or any extension if nil),
+    // and optionally for selecting directories instead of files.
+    func doOpen(_ title: String, _ extensions: [String]?, _ chooseDirectory: Bool) -> URL?
+    {
+        let dialog = NSOpenPanel()
+        dialog.title = title
+        dialog.showsResizeIndicator = true
+        dialog.canChooseDirectories = chooseDirectory
+        dialog.canChooseFiles = !chooseDirectory
+        dialog.showsHiddenFiles = false
+        dialog.canCreateDirectories = true
+        dialog.allowsMultipleSelection = false
+        dialog.allowsOtherFileTypes = (extensions == nil)
+        
+        if (extensions != nil) {
+            dialog.allowedFileTypes = extensions!;
+        }
+        
+        if (dialog.runModal() != NSApplication.ModalResponse.OK) {
+            return nil
+        }
+        
+        return dialog.url
+    }
+
 }
